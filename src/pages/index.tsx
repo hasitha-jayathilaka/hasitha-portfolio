@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import { motion } from "framer-motion";
+import { motion, cubicBezier } from "framer-motion";
 import {
   ArrowRight,
   Briefcase,
@@ -127,12 +127,13 @@ const work = [
 
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
-  show: (i = 0) => ({
+  show: {
     opacity: 1,
     y: 0,
-    transition: { delay: 0.06 * i, duration: 0.5, ease: "easeOut" },
-  }),
+    transition: { duration: 0.5, ease: cubicBezier(0.16, 1, 0.3, 1) },
+  },
 };
+
 
 function cn(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
