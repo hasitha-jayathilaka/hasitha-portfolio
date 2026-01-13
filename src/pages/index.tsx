@@ -174,8 +174,8 @@ function Button({
 }) {
   const base =
     "inline-flex items-center justify-center rounded-2xl px-4 py-2 text-sm font-medium transition-colors";
-  const solid = "bg-white text-black hover:bg-white/90";
-  const outline = "border border-white/15 bg-transparent text-white hover:bg-white/10";
+  const solid = "bg-[#C9A24D] text-[#0F1322] hover:bg-[#b8913f]";
+  const outline = "border border-[#F5F1E8]/20 bg-transparent text-[#F5F1E8] hover:bg-[#F5F1E8]/10";
   const cls = cn(base, variant === "solid" ? solid : outline, className);
 
   if (href) {
@@ -209,7 +209,8 @@ function SectionTitle({
         <div className="text-xs uppercase tracking-widest text-white/60">{eyebrow}</div>
       ) : null}
       <h2 className="text-2xl md:text-3xl font-semibold text-white">{title}</h2>
-      {desc ? <p className="text-white/70 max-w-2xl">{desc}</p> : null}
+      {desc ? <p className="text-[#F5F1E8]/70
+ max-w-2xl">{desc}</p> : null}
     </div>
   );
 }
@@ -225,7 +226,7 @@ export default function Home() {
         <meta name="description" content="Founder · Culture-Tech Venture Architect · Fractional CMO" />
       </Head>
 
-      <div className="min-h-screen bg-black text-white">
+      <div className="min-h-screen bg-[#0F1322] text-[#F5F1E8]">
         {/* Top nav */}
         <header className="sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur">
           <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
