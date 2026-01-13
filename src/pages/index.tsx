@@ -1,51 +1,17 @@
+import EnquiryModal from "../../components/EnquiryModal";
 import HeaderHero from "../../components/HeaderHero";
 import React from "react";
 import Head from "next/head";
 import { motion, cubicBezier } from "framer-motion";
-import {
-  ArrowRight,
-  Briefcase,
-  Building2,
-  Globe,
-  Layers,
-  Mail,
-  Sparkles,
-  Users,
-} from "lucide-react";
+import { ArrowRight, Briefcase, Building2, Globe, Sparkles } from "lucide-react";
 
 const nav = [
   { label: "Work", href: "#work" },
   { label: "Services", href: "#services" },
+  { label: "Gallery", href: "#gallery" },
   { label: "Ventures", href: "#ventures" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
-];
-
-const pills = [
-  "Culture-Tech",
-  "Game & XR",
-  "Fractional CMO",
-  "Product Strategy",
-  "IP & Licensing",
-  "Creator Economy",
-];
-
-const highlights = [
-  {
-    icon: Sparkles,
-    title: "Build cultural IP",
-    body: "Immersive worlds where art, history, and narrative become explorable experiences.",
-  },
-  {
-    icon: Layers,
-    title: "Build platforms",
-    body: "Licensing, creator monetization, and IP workflows for scalable digital ecosystems.",
-  },
-  {
-    icon: Users,
-    title: "Scale ventures",
-    body: "Positioning, go-to-market, and growth systems for early-stage and scaling teams.",
-  },
 ];
 
 const services = [
@@ -105,7 +71,7 @@ const ventures = [
   {
     title: "The ROI Firm",
     role: "Founder · Growth & Strategy",
-    body: "Consulting and digital growth partner for 25+ businesses-helping teams build distribution, content systems, and measurable marketing impact.",
+    body: "Consulting and digital growth partner for 25+ businesses - helping teams build distribution, content systems, and measurable marketing impact.",
     href: "https://theroifirm.com/",
     cta: "Visit firm",
   },
@@ -113,12 +79,12 @@ const ventures = [
 
 const work = [
   {
-    title: "The Archivist - VR World Reveal",
+    title: "The Archivist — VR World Reveal",
     type: "XR / Culture-Tech",
-    body: "A working VR prototype showcasing reconstructed environments inspired by Arles (1888) - designed for investor demos and institutional collaboration.",
+    body: "A working VR prototype showcasing reconstructed environments inspired by Arles (1888) — designed for investor demos and institutional collaboration.",
     chips: ["Unreal", "Quest", "World-building"],
     linkLabel: "Watch / view",
-    href: "#",
+    href: "https://youtu.be/kFBZ_071SHU",
   },
   {
     title: "Growth Systems for Multi-Industry Brands",
@@ -186,6 +152,7 @@ function Button({
   className,
   target,
   rel,
+  download,
 }: {
   children: React.ReactNode;
   href?: string;
@@ -194,6 +161,7 @@ function Button({
   className?: string;
   target?: string;
   rel?: string;
+  download?: boolean;
 }) {
   const base =
     "inline-flex items-center justify-center rounded-2xl px-4 py-2 text-sm font-medium transition-colors";
@@ -204,7 +172,13 @@ function Button({
 
   if (href) {
     return (
-      <a className={cls} href={href} target={target} rel={rel}>
+      <a
+        className={cls}
+        href={href}
+        target={target}
+        rel={rel}
+        {...(download ? { download: true } : {})}
+      >
         {children}
       </a>
     );
@@ -245,22 +219,39 @@ function SectionTitle({
 }
 
 export default function Home() {
-  const email = "hasitha@theroifirm.com"; // <-- CHANGE THIS
-  const linkedIn = "#"; // <-- CHANGE THIS
+  const email = "hasitha@theroifirm.com";
+  const linkedIn = "https://www.linkedin.com/in/hsjayathilaka/";
+  const calendly =
+    "https://calendly.com/hasitha-theroifirm/intro-call-hasitha-jayathilaka";
+
+  // One-pager file you will add to /public
+  const onePagerUrl = "/one-pager.pdf";
+
+  const [enquiryOpen, setEnquiryOpen] = React.useState(false);
+  const [enquiryDefault, setEnquiryDefault] = React.useState<
+    | "Fractional CMO / Growth Lead"
+    | "Creative & Product Strategy"
+    | "Venture & IP Architecture"
+    | "Other"
+  >("Fractional CMO / Growth Lead");
+
+  function openEnquiry(type: typeof enquiryDefault) {
+    setEnquiryDefault(type);
+    setEnquiryOpen(true);
+  }
 
   return (
     <>
       <Head>
-        <title>Hasitha Jayathilaka - Portfolio</title>
+        <title>Hasitha Jayathilaka — Portfolio</title>
         <meta
           name="description"
           content="Founder · Culture-Tech Venture Architect · Fractional CMO"
         />
       </Head>
 
-      
       <div className="min-h-screen bg-[#0F1322] text-[#F5F1E8]">
-        {/* Top nav */}
+        {/* Sticky Top Nav */}
         <header className="sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur">
           <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
             <a href="#" className="flex items-center gap-2">
@@ -289,33 +280,34 @@ export default function Home() {
 
             <div className="flex items-center gap-2">
               <Button
-                variant="outline"
-                className="hidden sm:inline-flex"
-                onClick={() =>
-                  document
-                    .querySelector("#contact")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-              >
-                Contact
-              </Button>
+  variant="outline"
+  className="hidden sm:inline-flex"
+  onClick={() =>
+    document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })
+  }
+>
+  Contact
+</Button>
               <Button
-                onClick={() =>
-                  document
-                    .querySelector("#services")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-              >
-                Work with me <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+  onClick={() => openEnquiry("Fractional CMO / Growth Lead")}
+>
+  Work with me <ArrowRight className="ml-2 h-4 w-4" />
+</Button>
             </div>
           </div>
         </header>
-<HeaderHero />
-        {/* ---- Your existing content continues below (unchanged) ---- */}
+
+        {/* Hero (portrait + logos) */}
+        <HeaderHero />
+
+        {/* Enquiry Modal (hidden until opened) */}
+        <EnquiryModal
+          open={enquiryOpen}
+          onClose={() => setEnquiryOpen(false)}
+          defaultType={enquiryDefault}
+        />
+
         <main className="mx-auto max-w-6xl px-4">
-          {/* Hero */}
-          
           {/* Work */}
           <section id="work" className="py-14 md:py-20">
             <SectionTitle
@@ -398,14 +390,19 @@ export default function Home() {
                       </ul>
                     </div>
 
+                    {/* ✅ Fixed Enquire Button */}
                     <Button
                       variant="outline"
                       className="w-full mt-5"
-                      onClick={() =>
-                        document
-                          .querySelector("#contact")
-                          ?.scrollIntoView({ behavior: "smooth" })
-                      }
+                      onClick={() => {
+                        const t =
+                          s.title.includes("Fractional")
+                            ? "Fractional CMO / Growth Lead"
+                            : s.title.includes("Creative")
+                            ? "Creative & Product Strategy"
+                            : "Venture & IP Architecture";
+                        openEnquiry(t);
+                      }}
                     >
                       Enquire <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
@@ -420,21 +417,71 @@ export default function Home() {
             <SectionTitle
               eyebrow="Behind the work"
               title="A Life Shaped by Culture, Technology & Leadership"
-              desc="A visual narrative - from public storytelling and cultural immersion to field research, disciplined practice, community leadership, venture building, and global engagement."
+              desc="A visual narrative — from public storytelling and cultural immersion to field research, disciplined practice, community leadership, venture building, and global engagement."
             />
 
             <div className="mt-10 grid grid-cols-2 md:grid-cols-5 gap-4">
               {[
-                { img: "01.jpg", title: "Tech Podcast Guest Interview", caption: "Sharing ideas on culture-tech, storytelling, and building real products." },
-                { img: "02.jpg", title: "Immersion in Contemporary Art", caption: "Learning from Sri Lanka’s art scene to inform authentic digital world-building." },
-                { img: "03.jpg", title: "Field Research: Pre-Brahmi Inscriptions (3rd c. BCE)", caption: "Hands-on documentation work from an archaeological heritage site (as society secretary)." },
-                { img: "04.jpg", title: "Cultural Exchange & Diplomacy", caption: "Gifting indigenous Veddah bows to Ono Sensei - heritage as living dialogue." },
-                { img: "05.jpg", title: "Kyudo Demonstration", caption: "Precision, calm, and ritual - values I carry into creative and technical leadership." },
-                { img: "06.jpg", title: "Founder: Green Knights Beach Clean-Up", caption: "Mobilizing volunteers for environmental impact through community-led action." },
-                { img: "07.jpg", title: "Product Launch: Per-Day Motor Insurance App", caption: "Led marketing and growth for a product that changed how insurance was accessed." },
-                { img: "08.jpg", title: "Yellow House Team at Infotel 2025", caption: "The studio journey - presenting immersive tech and cultural R&D on a national stage." },
-                { img: "09.jpg", title: "International Antarctica Expedition (2041)", caption: "Selected to explore climate leadership with Sir Robert Swan - perspective that shapes my work today." },
-                { img: "10.jpg", title: "Keynote: Digital News Platform Launch", caption: "Speaking at the intersection of media, technology, and public narrative." },
+                {
+                  img: "01.jpg",
+                  title: "Tech Podcast Guest Interview",
+                  caption:
+                    "Sharing ideas on culture-tech, storytelling, and building real products.",
+                },
+                {
+                  img: "02.jpg",
+                  title: "Immersion in Contemporary Art",
+                  caption:
+                    "Learning from Sri Lanka’s art scene to inform authentic digital world-building.",
+                },
+                {
+                  img: "03.jpg",
+                  title: "Field Research: Pre-Brahmi Inscriptions (3rd c. BCE)",
+                  caption:
+                    "Hands-on documentation work from an archaeological heritage site (as society secretary).",
+                },
+                {
+                  img: "04.jpg",
+                  title: "Cultural Exchange & Diplomacy",
+                  caption:
+                    "Gifting indigenous Veddah bows — heritage as living dialogue.",
+                },
+                {
+                  img: "05.jpg",
+                  title: "Kyudo Demonstration",
+                  caption:
+                    "Precision, calm, and ritual — values I carry into leadership.",
+                },
+                {
+                  img: "06.jpg",
+                  title: "Founder: Green Knights Beach Clean-Up",
+                  caption:
+                    "Mobilizing volunteers for environmental impact through community-led action.",
+                },
+                {
+                  img: "07.jpg",
+                  title: "Product Launch: Per-Day Motor Insurance App",
+                  caption:
+                    "Led marketing and growth for a product that changed how insurance was accessed.",
+                },
+                {
+                  img: "08.jpg",
+                  title: "Yellow House Team at Infotel 2025",
+                  caption:
+                    "Presenting immersive tech and cultural R&D on a national stage.",
+                },
+                {
+                  img: "09.jpg",
+                  title: "International Antarctica Expedition (2041)",
+                  caption:
+                    "Climate leadership perspective that shapes my work today.",
+                },
+                {
+                  img: "10.jpg",
+                  title: "Keynote: Digital News Platform Launch",
+                  caption:
+                    "Speaking at the intersection of media, technology, and public narrative.",
+                },
               ].map((item) => (
                 <div
                   key={item.img}
@@ -442,7 +489,7 @@ export default function Home() {
                 >
                   <img
                     src={`/gallery/${item.img}`}
-                    alt={`${item.title} - ${item.caption}`}
+                    alt={`${item.title} — ${item.caption}`}
                     className="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
                     loading="lazy"
                   />
@@ -464,7 +511,7 @@ export default function Home() {
             <SectionTitle
               eyebrow="Ventures"
               title="What I’m building"
-              desc="A venture studio approach: build IP, build platforms, build distribution - then scale through partnerships."
+              desc="A venture studio approach: build IP, build platforms, build distribution — then scale through partnerships."
             />
 
             <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -502,7 +549,7 @@ export default function Home() {
                 <SectionTitle
                   eyebrow="About"
                   title="Founder with a systems + story mindset"
-                  desc="I bridge creative direction with business execution - turning cultural research, partnerships, and technology into real products."
+                  desc="I bridge creative direction with business execution — turning cultural research, partnerships, and technology into real products."
                 />
               </div>
               <div className="md:col-span-7">
@@ -510,7 +557,7 @@ export default function Home() {
                   <div className="space-y-4 text-sm text-white/70">
                     <p>
                       My work spans game development, VR, marketing, and venture
-                      building - with a focus on projects where culture,
+                      building — with a focus on projects where culture,
                       narrative, and product must align. I’ve supported 25+
                       businesses through growth strategy, and I’m currently
                       building a research-driven cultural IP ecosystem around
@@ -581,6 +628,7 @@ export default function Home() {
                       >
                         Email me
                       </Button>
+
                       <Button
                         variant="outline"
                         href={linkedIn}
@@ -590,19 +638,31 @@ export default function Home() {
                       >
                         LinkedIn
                       </Button>
+
+                      {/* ✅ Optimized: downloadable one-pager */}
                       <Button
                         variant="outline"
-                        href="#"
+                        href={onePagerUrl}
+                        download
+                        className="w-full"
+                      >
+                        Download one-pager (PDF)
+                      </Button>
+
+                      <Button
+                        variant="outline"
+                        href={calendly}
                         target="_blank"
                         rel="noreferrer"
                         className="w-full"
                       >
-                        Download one-pager (add link)
+                        Book a call (Calendly)
                       </Button>
                     </div>
+
                     <p className="text-xs text-white/60 mt-4">
-                      Optional: add Calendly and replace “Book a call” links with
-                      your scheduling URL.
+                      For service enquiries, you can also use the “Enquire”
+                      buttons above to send a tagged message.
                     </p>
                   </Card>
                 </div>
@@ -614,13 +674,22 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>© {new Date().getFullYear()} Hasitha Jayathilaka</div>
               <div className="flex flex-wrap gap-4">
-                <a className="underline underline-offset-4 hover:text-white" href="#work">
+                <a
+                  className="underline underline-offset-4 hover:text-white"
+                  href="#work"
+                >
                   Work
                 </a>
-                <a className="underline underline-offset-4 hover:text-white" href="#services">
+                <a
+                  className="underline underline-offset-4 hover:text-white"
+                  href="#services"
+                >
                   Services
                 </a>
-                <a className="underline underline-offset-4 hover:text-white" href="#contact">
+                <a
+                  className="underline underline-offset-4 hover:text-white"
+                  href="#contact"
+                >
                   Contact
                 </a>
               </div>

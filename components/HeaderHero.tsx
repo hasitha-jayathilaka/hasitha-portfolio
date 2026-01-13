@@ -97,12 +97,23 @@ export default function HeaderHero() {
               </div>
 
               <div className="mt-10 flex flex-wrap gap-3">
-                <button className="rounded-2xl bg-[#F6C85F] text-[#0B1026] px-5 py-3 font-medium shadow hover:opacity-95 transition">
-                  View Work
-                </button>
-                <button className="rounded-2xl border border-white/15 bg-white/5 px-5 py-3 font-medium hover:bg-white/10 transition">
-                  Contact
-                </button>
+                <button
+  onClick={() =>
+    document.querySelector("#ventures")?.scrollIntoView({ behavior: "smooth" })
+  }
+  className="rounded-2xl bg-[#F6C85F] text-[#0B1026] px-5 py-3 font-medium shadow hover:opacity-95 transition"
+>
+  View Work
+</button>
+
+<button
+  onClick={() =>
+    document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })
+  }
+  className="rounded-2xl border border-white/15 bg-white/5 px-5 py-3 font-medium hover:bg-white/10 transition"
+>
+  Contact
+</button>
               </div>
             </motion.div>
 
