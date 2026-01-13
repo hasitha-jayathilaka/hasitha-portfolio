@@ -109,8 +109,8 @@ export default function EnquiryModal({
 
   if (!open) return null;
 
-  return (
-    <div className="fixed inset-0 z-[100]">
+     return (
+  <div className="fixed inset-0 z-[100] overflow-y-auto">
       {/* Backdrop */}
       <button
         className="absolute inset-0 bg-black/70"
@@ -118,10 +118,10 @@ export default function EnquiryModal({
         aria-label="Close modal"
       />
       {/* Modal */}
-      <div className="relative mx-auto mt-16 w-[92%] max-w-xl">
-        <div className="rounded-3xl border border-white/10 bg-[#0F1322] text-[#F5F1E8] shadow-2xl overflow-hidden">
+      <div className="relative mx-auto my-6 w-[92%] max-w-xl">
+        <div className="rounded-3xl border border-white/10 bg-[#0F1322] text-[#F5F1E8] shadow-2xl overflow-hidden max-h-[calc(100vh-3rem)]">
           <div className="h-1.5 bg-gradient-to-r from-[#F6C85F] via-[#8B5CF6] to-[#F6C85F]" />
-          <div className="p-6 md:p-8">
+          <div className="p-6 md:p-8 overflow-y-auto">
             <div className="flex items-start justify-between gap-4">
               <div>
                 <h3 className="text-xl font-semibold">Enquiry</h3>
