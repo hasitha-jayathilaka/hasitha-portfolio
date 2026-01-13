@@ -1,3 +1,4 @@
+import HeaderHero from "../../components/HeaderHero";
 import React from "react";
 import Head from "next/head";
 import { motion, cubicBezier } from "framer-motion";
@@ -30,9 +31,21 @@ const pills = [
 ];
 
 const highlights = [
-  { icon: Sparkles, title: "Build cultural IP", body: "Immersive worlds where art, history, and narrative become explorable experiences." },
-  { icon: Layers, title: "Build platforms", body: "Licensing, creator monetization, and IP workflows for scalable digital ecosystems." },
-  { icon: Users, title: "Scale ventures", body: "Positioning, go-to-market, and growth systems for early-stage and scaling teams." },
+  {
+    icon: Sparkles,
+    title: "Build cultural IP",
+    body: "Immersive worlds where art, history, and narrative become explorable experiences.",
+  },
+  {
+    icon: Layers,
+    title: "Build platforms",
+    body: "Licensing, creator monetization, and IP workflows for scalable digital ecosystems.",
+  },
+  {
+    icon: Users,
+    title: "Scale ventures",
+    body: "Positioning, go-to-market, and growth systems for early-stage and scaling teams.",
+  },
 ];
 
 const services = [
@@ -78,7 +91,7 @@ const ventures = [
   {
     title: "Yellow House Productions",
     role: "Founder · Studio Lead",
-    body: "Culture-tech game and VR studio building The Archivist — immersive reconstructions of real historical environments for entertainment, education, and cultural tourism.",
+    body: "Culture-tech game and VR studio building The Archivist - immersive reconstructions of real historical environments for entertainment, education, and cultural tourism.",
     href: "https://thearchivistgame.com/",
     cta: "Visit project",
   },
@@ -92,7 +105,7 @@ const ventures = [
   {
     title: "The ROI Firm",
     role: "Founder · Growth & Strategy",
-    body: "Consulting and digital growth partner for 25+ businesses—helping teams build distribution, content systems, and measurable marketing impact.",
+    body: "Consulting and digital growth partner for 25+ businesses-helping teams build distribution, content systems, and measurable marketing impact.",
     href: "https://theroifirm.com/",
     cta: "Visit firm",
   },
@@ -100,9 +113,9 @@ const ventures = [
 
 const work = [
   {
-    title: "The Archivist — VR World Reveal",
+    title: "The Archivist - VR World Reveal",
     type: "XR / Culture-Tech",
-    body: "A working VR prototype showcasing reconstructed environments inspired by Arles (1888) — designed for investor demos and institutional collaboration.",
+    body: "A working VR prototype showcasing reconstructed environments inspired by Arles (1888) - designed for investor demos and institutional collaboration.",
     chips: ["Unreal", "Quest", "World-building"],
     linkLabel: "Watch / view",
     href: "#",
@@ -134,7 +147,6 @@ const fadeUp = {
   },
 };
 
-
 function cn(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
 }
@@ -147,9 +159,20 @@ function Badge({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Card({ children, className }: { children: React.ReactNode; className?: string }) {
+function Card({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
-    <div className={cn("rounded-2xl border border-white/10 bg-white/5 shadow-sm", className)}>
+    <div
+      className={cn(
+        "rounded-2xl border border-white/10 bg-white/5 shadow-sm",
+        className
+      )}
+    >
       {children}
     </div>
   );
@@ -175,7 +198,8 @@ function Button({
   const base =
     "inline-flex items-center justify-center rounded-2xl px-4 py-2 text-sm font-medium transition-colors";
   const solid = "bg-[#C9A24D] text-[#0F1322] hover:bg-[#b8913f]";
-  const outline = "border border-[#F5F1E8]/20 bg-transparent text-[#F5F1E8] hover:bg-[#F5F1E8]/10";
+  const outline =
+    "border border-[#F5F1E8]/20 bg-transparent text-[#F5F1E8] hover:bg-[#F5F1E8]/10";
   const cls = cn(base, variant === "solid" ? solid : outline, className);
 
   if (href) {
@@ -206,26 +230,35 @@ function SectionTitle({
   return (
     <div className={cn("space-y-2", align === "center" && "text-center")}>
       {eyebrow ? (
-        <div className="text-xs uppercase tracking-widest text-white/60">{eyebrow}</div>
+        <div className="text-xs uppercase tracking-widest text-white/60">
+          {eyebrow}
+        </div>
       ) : null}
-      <h2 className="text-2xl md:text-3xl font-semibold text-white">{title}</h2>
-      {desc ? <p className="text-[#F5F1E8]/70
- max-w-2xl">{desc}</p> : null}
+      <h2 className="text-2xl md:text-3xl font-semibold text-white">
+        {title}
+      </h2>
+      {desc ? (
+        <p className="text-[#F5F1E8]/70 max-w-2xl">{desc}</p>
+      ) : null}
     </div>
   );
 }
 
 export default function Home() {
-  const email = "youremail@example.com"; // <-- CHANGE THIS
+  const email = "hasitha@theroifirm.com"; // <-- CHANGE THIS
   const linkedIn = "#"; // <-- CHANGE THIS
 
   return (
     <>
       <Head>
-        <title>Hasitha Jayathilaka — Portfolio</title>
-        <meta name="description" content="Founder · Culture-Tech Venture Architect · Fractional CMO" />
+        <title>Hasitha Jayathilaka - Portfolio</title>
+        <meta
+          name="description"
+          content="Founder · Culture-Tech Venture Architect · Fractional CMO"
+        />
       </Head>
 
+      
       <div className="min-h-screen bg-[#0F1322] text-[#F5F1E8]">
         {/* Top nav */}
         <header className="sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur">
@@ -236,13 +269,19 @@ export default function Home() {
               </div>
               <div className="leading-tight">
                 <div className="text-sm font-semibold">Hasitha Jayathilaka</div>
-                <div className="text-xs text-white/60">Founder · Culture-Tech · Fractional CMO</div>
+                <div className="text-xs text-white/60">
+                  Founder · Culture-Tech · Fractional CMO
+                </div>
               </div>
             </a>
 
             <nav className="hidden md:flex items-center gap-6">
               {nav.map((n) => (
-                <a key={n.href} href={n.href} className="text-sm text-white/70 hover:text-white transition-colors">
+                <a
+                  key={n.href}
+                  href={n.href}
+                  className="text-sm text-white/70 hover:text-white transition-colors"
+                >
                   {n.label}
                 </a>
               ))}
@@ -252,125 +291,31 @@ export default function Home() {
               <Button
                 variant="outline"
                 className="hidden sm:inline-flex"
-                onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() =>
+                  document
+                    .querySelector("#contact")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
               >
                 Contact
               </Button>
-              <Button onClick={() => document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" })}>
+              <Button
+                onClick={() =>
+                  document
+                    .querySelector("#services")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+              >
                 Work with me <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
           </div>
         </header>
-
+<HeaderHero />
+        {/* ---- Your existing content continues below (unchanged) ---- */}
         <main className="mx-auto max-w-6xl px-4">
           {/* Hero */}
-          <section className="py-14 md:py-20">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
-              <motion.div
-                className="md:col-span-7 space-y-6"
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, margin: "-80px" }}
-                variants={fadeUp}
-              >
-                <div className="flex flex-wrap gap-2">
-                  {pills.map((p) => (
-                    <Badge key={p}>{p}</Badge>
-                  ))}
-                </div>
-
-                <h1 className="text-4xl md:text-5xl font-semibold leading-tight">
-                  I build immersive cultural IP, creator platforms, and growth systems.
-                </h1>
-
-                <p className="text-white/70 text-lg max-w-2xl">
-                  Founder of Yellow House Productions and The ROI Firm. Building <span className="text-white font-medium">The Archivist</span> (game +
-                  VR-led cultural IP) and <span className="text-white font-medium">Linseed</span> (creator licensing & IP economy). Available for fractional
-                  leadership and strategic roles.
-                </p>
-
-                <div className="flex flex-wrap gap-3">
-                  <Button onClick={() => document.querySelector("#work")?.scrollIntoView({ behavior: "smooth" })}>
-                    View work <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                  <Button
-                    variant="outline"
-                    onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
-                  >
-                    Book a call
-                  </Button>
-                </div>
-
-                <div className="pt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  {highlights.map((h, i) => (
-                    <motion.div key={h.title} custom={i} variants={fadeUp}>
-                      <Card className="p-5">
-                        <div className="flex items-center gap-2 font-medium">
-                          <h.icon className="h-4 w-4" /> {h.title}
-                        </div>
-                        <div className="mt-2 text-sm text-white/70">{h.body}</div>
-                      </Card>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-
-              <motion.div
-                className="md:col-span-5"
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, margin: "-80px" }}
-                variants={fadeUp}
-              >
-                <Card className="rounded-3xl overflow-hidden p-6 md:p-7">
-                  <div className="space-y-5">
-                    <div className="space-y-1">
-                      <div className="text-xs uppercase tracking-widest text-white/60">Currently building</div>
-                      <div className="text-lg font-semibold">The Archivist · Linseed</div>
-                    </div>
-
-                    <div className="h-px bg-white/10" />
-
-                    <div className="space-y-3">
-                      <div className="text-sm text-white/70">Ideal opportunities</div>
-                      <div className="flex flex-wrap gap-2">
-                        {["Fractional CMO", "Head of XR", "Product Strategy", "Partnerships", "Creative Tech"].map((t) => (
-                          <Badge key={t}>{t}</Badge>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="h-px bg-white/10" />
-
-                    <div className="space-y-3">
-                      <div className="text-sm font-medium">Fast links</div>
-                      <div className="grid grid-cols-1 gap-2 text-sm">
-                        <a className="underline underline-offset-4 hover:text-white" href="https://thearchivistgame.com/" target="_blank" rel="noreferrer">
-                          The Archivist
-                        </a>
-                        <a className="underline underline-offset-4 hover:text-white" href="https://theroifirm.com/" target="_blank" rel="noreferrer">
-                          The ROI Firm
-                        </a>
-                        <a className="underline underline-offset-4 hover:text-white" href={linkedIn} target="_blank" rel="noreferrer">
-                          LinkedIn
-                        </a>
-                      </div>
-                    </div>
-
-                    <Button href={`mailto:${email}?subject=Opportunity%20for%20Hasitha%20Jayathilaka`} className="w-full">
-                      Reach out <Mail className="ml-2 h-4 w-4" />
-                    </Button>
-
-                    <p className="text-xs text-white/60">
-                      Tip: Replace this card with a short 30–45s showreel embed (YouTube/Vimeo) for stronger conversions.
-                    </p>
-                  </div>
-                </Card>
-              </motion.div>
-            </div>
-          </section>
-
+          
           {/* Work */}
           <section id="work" className="py-14 md:py-20">
             <SectionTitle
@@ -390,7 +335,9 @@ export default function Home() {
                   variants={fadeUp}
                 >
                   <Card className="p-6 h-full">
-                    <div className="text-xs uppercase tracking-widest text-white/60">{w.type}</div>
+                    <div className="text-xs uppercase tracking-widest text-white/60">
+                      {w.type}
+                    </div>
                     <div className="mt-2 text-lg font-semibold">{w.title}</div>
                     <div className="mt-3 flex flex-wrap gap-2">
                       {w.chips.map((c) => (
@@ -398,8 +345,12 @@ export default function Home() {
                       ))}
                     </div>
                     <p className="mt-4 text-sm text-white/70">{w.body}</p>
-                    <a href={w.href} className="mt-5 inline-flex items-center text-sm underline underline-offset-4 hover:text-white">
-                      {w.linkLabel} <ArrowRight className="ml-2 h-4 w-4" />
+                    <a
+                      href={w.href}
+                      className="mt-5 inline-flex items-center text-sm underline underline-offset-4 hover:text-white"
+                    >
+                      {w.linkLabel}{" "}
+                      <ArrowRight className="ml-2 h-4 w-4" />
                     </a>
                   </Card>
                 </motion.div>
@@ -450,7 +401,11 @@ export default function Home() {
                     <Button
                       variant="outline"
                       className="w-full mt-5"
-                      onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
+                      onClick={() =>
+                        document
+                          .querySelector("#contact")
+                          ?.scrollIntoView({ behavior: "smooth" })
+                      }
                     >
                       Enquire <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
@@ -460,12 +415,56 @@ export default function Home() {
             </div>
           </section>
 
+          {/* Gallery */}
+          <section id="gallery" className="py-14 md:py-20">
+            <SectionTitle
+              eyebrow="Behind the work"
+              title="A Life Shaped by Culture, Technology & Leadership"
+              desc="A visual narrative - from public storytelling and cultural immersion to field research, disciplined practice, community leadership, venture building, and global engagement."
+            />
+
+            <div className="mt-10 grid grid-cols-2 md:grid-cols-5 gap-4">
+              {[
+                { img: "01.jpg", title: "Tech Podcast Guest Interview", caption: "Sharing ideas on culture-tech, storytelling, and building real products." },
+                { img: "02.jpg", title: "Immersion in Contemporary Art", caption: "Learning from Sri Lanka’s art scene to inform authentic digital world-building." },
+                { img: "03.jpg", title: "Field Research: Pre-Brahmi Inscriptions (3rd c. BCE)", caption: "Hands-on documentation work from an archaeological heritage site (as society secretary)." },
+                { img: "04.jpg", title: "Cultural Exchange & Diplomacy", caption: "Gifting indigenous Veddah bows to Ono Sensei - heritage as living dialogue." },
+                { img: "05.jpg", title: "Kyudo Demonstration", caption: "Precision, calm, and ritual - values I carry into creative and technical leadership." },
+                { img: "06.jpg", title: "Founder: Green Knights Beach Clean-Up", caption: "Mobilizing volunteers for environmental impact through community-led action." },
+                { img: "07.jpg", title: "Product Launch: Per-Day Motor Insurance App", caption: "Led marketing and growth for a product that changed how insurance was accessed." },
+                { img: "08.jpg", title: "Yellow House Team at Infotel 2025", caption: "The studio journey - presenting immersive tech and cultural R&D on a national stage." },
+                { img: "09.jpg", title: "International Antarctica Expedition (2041)", caption: "Selected to explore climate leadership with Sir Robert Swan - perspective that shapes my work today." },
+                { img: "10.jpg", title: "Keynote: Digital News Platform Launch", caption: "Speaking at the intersection of media, technology, and public narrative." },
+              ].map((item) => (
+                <div
+                  key={item.img}
+                  className="group rounded-2xl overflow-hidden border border-[#F5F1E8]/10 bg-white/5"
+                >
+                  <img
+                    src={`/gallery/${item.img}`}
+                    alt={`${item.title} - ${item.caption}`}
+                    className="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
+                    loading="lazy"
+                  />
+                  <div className="p-3">
+                    <div className="text-xs font-semibold text-[#F5F1E8]">
+                      {item.title}
+                    </div>
+                    <div className="mt-1 text-xs text-[#F5F1E8]/75 leading-snug">
+                      {item.caption}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
           {/* Ventures */}
           <section id="ventures" className="py-14 md:py-20">
             <SectionTitle
               eyebrow="Ventures"
               title="What I’m building"
-              desc="A venture studio approach: build IP, build platforms, build distribution — then scale through partnerships."
+              desc="A venture studio approach: build IP, build platforms, build distribution - then scale through partnerships."
             />
 
             <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -503,26 +502,42 @@ export default function Home() {
                 <SectionTitle
                   eyebrow="About"
                   title="Founder with a systems + story mindset"
-                  desc="I bridge creative direction with business execution — turning cultural research, partnerships, and technology into real products."
+                  desc="I bridge creative direction with business execution - turning cultural research, partnerships, and technology into real products."
                 />
               </div>
               <div className="md:col-span-7">
                 <Card className="p-6 md:p-7">
                   <div className="space-y-4 text-sm text-white/70">
                     <p>
-                      My work spans game development, VR, marketing, and venture building — with a focus on projects where culture, narrative, and product must align.
-                      I’ve supported 25+ businesses through growth strategy, and I’m currently building a research-driven cultural IP ecosystem around immersive worlds,
-                      creator pipelines, and licensing.
+                      My work spans game development, VR, marketing, and venture
+                      building - with a focus on projects where culture,
+                      narrative, and product must align. I’ve supported 25+
+                      businesses through growth strategy, and I’m currently
+                      building a research-driven cultural IP ecosystem around
+                      immersive worlds, creator pipelines, and licensing.
                     </p>
                     <p>
-                      Alongside the ventures, I’m developing the <span className="text-white font-medium">Yellow House Reference Library</span> (2,000+ books) as part of
-                      a research center designed to empower innovators and change-makers.
+                      Alongside the ventures, I’m developing the{" "}
+                      <span className="text-white font-medium">
+                        Yellow House Reference Library
+                      </span>{" "}
+                      (2,000+ books) as part of a research center designed to
+                      empower innovators and change-makers.
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-                      {["Institutional collaboration", "Product + growth strategy", "Immersive storytelling"].map((k) => (
-                        <div key={k} className="rounded-2xl border border-white/10 bg-white/5 p-3 text-white">
-                          <div className="text-xs uppercase tracking-widest text-white/60">Focus</div>
+                      {[
+                        "Institutional collaboration",
+                        "Product + growth strategy",
+                        "Immersive storytelling",
+                      ].map((k) => (
+                        <div
+                          key={k}
+                          className="rounded-2xl border border-white/10 bg-white/5 p-3 text-white"
+                        >
+                          <div className="text-xs uppercase tracking-widest text-white/60">
+                            Focus
+                          </div>
                           <div className="font-medium mt-1">{k}</div>
                         </div>
                       ))}
@@ -544,8 +559,15 @@ export default function Home() {
                     desc="If you’re hiring for a senior role or want fractional leadership, I can help you move from narrative → traction → scale."
                   />
                   <div className="text-sm text-white/70 space-y-1">
-                    <div>Email: <span className="text-white">{email}</span></div>
-                    <div>Location: <span className="text-white">Sri Lanka (remote/global)</span></div>
+                    <div>
+                      Email: <span className="text-white">{email}</span>
+                    </div>
+                    <div>
+                      Location:{" "}
+                      <span className="text-white">
+                        Sri Lanka (remote/global)
+                      </span>
+                    </div>
                   </div>
                 </div>
 
@@ -553,18 +575,34 @@ export default function Home() {
                   <Card className="p-6">
                     <div className="text-sm font-medium">Quick actions</div>
                     <div className="grid gap-2 mt-4">
-                      <Button href={`mailto:${email}?subject=Opportunity%20for%20Hasitha%20Jayathilaka`} className="w-full">
+                      <Button
+                        href={`mailto:${email}?subject=Opportunity%20for%20Hasitha%20Jayathilaka`}
+                        className="w-full"
+                      >
                         Email me
                       </Button>
-                      <Button variant="outline" href={linkedIn} target="_blank" rel="noreferrer" className="w-full">
+                      <Button
+                        variant="outline"
+                        href={linkedIn}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="w-full"
+                      >
                         LinkedIn
                       </Button>
-                      <Button variant="outline" href="#" target="_blank" rel="noreferrer" className="w-full">
+                      <Button
+                        variant="outline"
+                        href="#"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="w-full"
+                      >
                         Download one-pager (add link)
                       </Button>
                     </div>
                     <p className="text-xs text-white/60 mt-4">
-                      Optional: add Calendly and replace “Book a call” links with your scheduling URL.
+                      Optional: add Calendly and replace “Book a call” links with
+                      your scheduling URL.
                     </p>
                   </Card>
                 </div>
@@ -576,9 +614,15 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>© {new Date().getFullYear()} Hasitha Jayathilaka</div>
               <div className="flex flex-wrap gap-4">
-                <a className="underline underline-offset-4 hover:text-white" href="#work">Work</a>
-                <a className="underline underline-offset-4 hover:text-white" href="#services">Services</a>
-                <a className="underline underline-offset-4 hover:text-white" href="#contact">Contact</a>
+                <a className="underline underline-offset-4 hover:text-white" href="#work">
+                  Work
+                </a>
+                <a className="underline underline-offset-4 hover:text-white" href="#services">
+                  Services
+                </a>
+                <a className="underline underline-offset-4 hover:text-white" href="#contact">
+                  Contact
+                </a>
               </div>
             </div>
           </footer>
