@@ -7,6 +7,7 @@ import { ArrowRight, Briefcase, Building2, Globe, Sparkles } from "lucide-react"
 
 const nav = [
   { label: "Work", href: "#work" },
+  { label: "Case Studies", href: "/case-studies" },
   { label: "Services", href: "#services" },
   { label: "Gallery", href: "#gallery" },
   { label: "Ventures", href: "#ventures" },
@@ -53,7 +54,15 @@ const services = [
   },
 ];
 
-const ventures = [
+type Venture = {
+  title: string;
+  role: string;
+  body: string;
+  href?: string;
+  cta?: string;
+};
+
+const ventures: Venture[] = [
   {
     title: "Yellow House Productions",
     role: "Founder · Studio Lead",
@@ -65,8 +74,7 @@ const ventures = [
     title: "Linseed",
     role: "Founder · Platform Architect",
     body: "Creator-licensing and asset economy platform enabling monetization, IP protection, and collaborative production pipelines for studios, artists, and institutions.",
-    href: "#",
-    cta: "See overview",
+    // ✅ No href/cta => no button renders
   },
   {
     title: "The ROI Firm",
@@ -77,11 +85,20 @@ const ventures = [
   },
 ];
 
-const work = [
+type WorkItem = {
+  title: string;
+  type: string;
+  body: string;
+  chips: string[];
+  linkLabel?: string;
+  href?: string;
+};
+
+const work: WorkItem[] = [
   {
-    title: "The Archivist — VR World Reveal",
+    title: "The Archivist - VR World Reveal",
     type: "XR / Culture-Tech",
-    body: "A working VR prototype showcasing reconstructed environments inspired by Arles (1888) — designed for investor demos and institutional collaboration.",
+    body: "A working VR prototype showcasing reconstructed environments inspired by Arles (1888) - designed for investor demos and institutional collaboration.",
     chips: ["Unreal", "Quest", "World-building"],
     linkLabel: "Watch / view",
     href: "https://youtu.be/kFBZ_071SHU",
@@ -91,16 +108,15 @@ const work = [
     type: "Fractional / Consulting",
     body: "Positioning, content engines, and conversion pathways delivered across hospitality, finance, media, and creator brands.",
     chips: ["Positioning", "Content", "Performance"],
-    linkLabel: "See case style",
-    href: "#",
+    linkLabel: "See case studies",
+    href: "/case-studies",
   },
   {
     title: "Creator Licensing & IP Workflows",
     type: "Platform / IP",
     body: "Designing practical licensing models and creator pipelines that reduce friction and unlock monetization for assets and knowledge.",
     chips: ["Licensing", "Economics", "Governance"],
-    linkLabel: "Explore",
-    href: "#",
+    // ✅ Explore removed (no linkLabel/href)
   },
 ];
 
@@ -208,12 +224,8 @@ function SectionTitle({
           {eyebrow}
         </div>
       ) : null}
-      <h2 className="text-2xl md:text-3xl font-semibold text-white">
-        {title}
-      </h2>
-      {desc ? (
-        <p className="text-[#F5F1E8]/70 max-w-2xl">{desc}</p>
-      ) : null}
+      <h2 className="text-2xl md:text-3xl font-semibold text-white">{title}</h2>
+      {desc ? <p className="text-[#F5F1E8]/70 max-w-2xl">{desc}</p> : null}
     </div>
   );
 }
@@ -243,7 +255,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Hasitha Jayathilaka — Portfolio</title>
+        <title>Hasitha Jayathilaka - Portfolio</title>
         <meta
           name="description"
           content="Founder · Culture-Tech Venture Architect · Fractional CMO"
@@ -280,19 +292,19 @@ export default function Home() {
 
             <div className="flex items-center gap-2">
               <Button
-  variant="outline"
-  className="hidden sm:inline-flex"
-  onClick={() =>
-    document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })
-  }
->
-  Contact
-</Button>
-              <Button
-  onClick={() => openEnquiry("Fractional CMO / Growth Lead")}
->
-  Work with me <ArrowRight className="ml-2 h-4 w-4" />
-</Button>
+                variant="outline"
+                className="hidden sm:inline-flex"
+                onClick={() =>
+                  document
+                    .querySelector("#contact")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+              >
+                Contact
+              </Button>
+              <Button onClick={() => openEnquiry("Fractional CMO / Growth Lead")}>
+                Work with me <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
             </div>
           </div>
         </header>
@@ -337,13 +349,18 @@ export default function Home() {
                       ))}
                     </div>
                     <p className="mt-4 text-sm text-white/70">{w.body}</p>
-                    <a
-                      href={w.href}
-                      className="mt-5 inline-flex items-center text-sm underline underline-offset-4 hover:text-white"
-                    >
-                      {w.linkLabel}{" "}
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </a>
+
+                    {/* ✅ Only render link when present */}
+                    {w.linkLabel && w.href ? (
+                      <a
+                        href={w.href}
+                        target={w.href.startsWith("http") ? "_blank" : undefined}
+                        rel={w.href.startsWith("http") ? "noreferrer" : undefined}
+                        className="mt-5 inline-flex items-center text-sm underline underline-offset-4 hover:text-white"
+                      >
+                        {w.linkLabel} <ArrowRight className="ml-2 h-4 w-4" />
+                      </a>
+                    ) : null}
                   </Card>
                 </motion.div>
               ))}
@@ -390,7 +407,6 @@ export default function Home() {
                       </ul>
                     </div>
 
-                    {/* ✅ Fixed Enquire Button */}
                     <Button
                       variant="outline"
                       className="w-full mt-5"
@@ -417,7 +433,7 @@ export default function Home() {
             <SectionTitle
               eyebrow="Behind the work"
               title="A Life Shaped by Culture, Technology & Leadership"
-              desc="A visual narrative — from public storytelling and cultural immersion to field research, disciplined practice, community leadership, venture building, and global engagement."
+              desc="A visual narrative - from public storytelling and cultural immersion to field research, disciplined practice, community leadership, venture building, and global engagement."
             />
 
             <div className="mt-10 grid grid-cols-2 md:grid-cols-5 gap-4">
@@ -444,13 +460,13 @@ export default function Home() {
                   img: "04.jpg",
                   title: "Cultural Exchange & Diplomacy",
                   caption:
-                    "Gifting indigenous Veddah bows — heritage as living dialogue.",
+                    "Gifting indigenous Veddah bows - heritage as living dialogue.",
                 },
                 {
                   img: "05.jpg",
                   title: "Kyudo Demonstration",
                   caption:
-                    "Precision, calm, and ritual — values I carry into leadership.",
+                    "Precision, calm, and ritual - values I carry into leadership.",
                 },
                 {
                   img: "06.jpg",
@@ -489,7 +505,7 @@ export default function Home() {
                 >
                   <img
                     src={`/gallery/${item.img}`}
-                    alt={`${item.title} — ${item.caption}`}
+                    alt={`${item.title} - ${item.caption}`}
                     className="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
                     loading="lazy"
                   />
@@ -511,7 +527,7 @@ export default function Home() {
             <SectionTitle
               eyebrow="Ventures"
               title="What I’m building"
-              desc="A venture studio approach: build IP, build platforms, build distribution — then scale through partnerships."
+              desc="A venture studio approach: build IP, build platforms, build distribution - then scale through partnerships."
             />
 
             <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -528,14 +544,18 @@ export default function Home() {
                     <div className="text-lg font-semibold">{v.title}</div>
                     <div className="mt-1 text-sm text-white/70">{v.role}</div>
                     <p className="mt-4 text-sm text-white/70">{v.body}</p>
-                    <a
-                      href={v.href}
-                      target={v.href.startsWith("http") ? "_blank" : undefined}
-                      rel={v.href.startsWith("http") ? "noreferrer" : undefined}
-                      className="mt-5 inline-flex items-center text-sm underline underline-offset-4 hover:text-white"
-                    >
-                      {v.cta} <ArrowRight className="ml-2 h-4 w-4" />
-                    </a>
+
+                    {/* ✅ Only render CTA if href + cta exist */}
+                    {v.href && v.cta ? (
+                      <a
+                        href={v.href}
+                        target={v.href.startsWith("http") ? "_blank" : undefined}
+                        rel={v.href.startsWith("http") ? "noreferrer" : undefined}
+                        className="mt-5 inline-flex items-center text-sm underline underline-offset-4 hover:text-white"
+                      >
+                        {v.cta} <ArrowRight className="ml-2 h-4 w-4" />
+                      </a>
+                    ) : null}
                   </Card>
                 </motion.div>
               ))}
@@ -549,7 +569,7 @@ export default function Home() {
                 <SectionTitle
                   eyebrow="About"
                   title="Founder with a systems + story mindset"
-                  desc="I bridge creative direction with business execution — turning cultural research, partnerships, and technology into real products."
+                  desc="I bridge creative direction with business execution - turning cultural research, partnerships, and technology into real products."
                 />
               </div>
               <div className="md:col-span-7">
@@ -557,7 +577,7 @@ export default function Home() {
                   <div className="space-y-4 text-sm text-white/70">
                     <p>
                       My work spans game development, VR, marketing, and venture
-                      building — with a focus on projects where culture,
+                      building - with a focus on projects where culture,
                       narrative, and product must align. I’ve supported 25+
                       businesses through growth strategy, and I’m currently
                       building a research-driven cultural IP ecosystem around
@@ -639,7 +659,6 @@ export default function Home() {
                         LinkedIn
                       </Button>
 
-                      {/* ✅ Optimized: downloadable one-pager */}
                       <Button
                         variant="outline"
                         href={onePagerUrl}
