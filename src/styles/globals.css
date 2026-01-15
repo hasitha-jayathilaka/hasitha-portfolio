@@ -1,10 +1,57 @@
 @import "tailwindcss";
 
+/* =========================================
+   BLACK GALLERY — Cultural Authority
+   Gallery Black  : #050505
+   Lifted Black   : #0E0E0E
+   Border         : #1F1F1F
+   White          : #FFFFFF
+   Secondary Text : #CFCFCF
+   Muted Text     : #9A9A9A
+   Museum Gold    : #D4AF37
+   Gold Hover     : #F0C75E
+   Deep Blue (opt): #1C3A5F
+========================================= */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Core */
+  --background: #050505;
+  --foreground: #ffffff;
+
+  /* Brand accents */
+  --brand-gold: #d4af37;
+  --brand-gold-hover: #f0c75e;
+  --brand-blue: #1c3a5f;
+
+  /* Surfaces */
+  --surface-1: rgba(255, 255, 255, 0.05); /* cards */
+  --surface-2: rgba(255, 255, 255, 0.08); /* hover */
+  --surface-3: rgba(255, 255, 255, 0.10); /* stronger */
+  --border: rgba(255, 255, 255, 0.10);
+  --border-strong: rgba(255, 255, 255, 0.16);
+
+  /* Text */
+  --muted: rgba(255, 255, 255, 0.78);   /* readable paragraph */
+  --muted-2: rgba(255, 255, 255, 0.62); /* captions */
+  --muted-3: rgba(255, 255, 255, 0.48); /* eyebrow labels */
+
+  /* Effects */
+  --shadow-soft: 0 22px 60px rgba(0, 0, 0, 0.65);
+  --shadow-card: 0 12px 36px rgba(0, 0, 0, 0.55);
+
+  /* Focus ring */
+  --focus: rgba(212, 175, 55, 0.35);
+
+  /* Page glow/vignette */
+  --page-glow: radial-gradient(
+    1200px 600px at 20% 0%,
+    rgba(212, 175, 55, 0.12),
+    rgba(28, 58, 95, 0.08),
+    rgba(0, 0, 0, 0) 60%
+  );
 }
 
+/* Tailwind theme tokens mapped */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -12,15 +59,70 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* Keep palette consistent; do NOT auto-switch */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #050505;
+    --foreground: #ffffff;
   }
+}
+
+html,
+body {
+  height: 100%;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Global page “gallery” feel */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: var(--page-glow);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    1200px 800px at 50% 50%,
+    rgba(255, 255, 255, 0.03),
+    rgba(0, 0, 0, 0.75) 65%,
+    rgba(0, 0, 0, 0.92)
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+#___next,
+#__next {
+  position: relative;
+  z-index: 1;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: rgba(212, 175, 55, 0.25);
+}
+
+/* Optional helper classes */
+.theme-card {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+}
+
+.theme-muted {
+  color: var(--muted);
 }

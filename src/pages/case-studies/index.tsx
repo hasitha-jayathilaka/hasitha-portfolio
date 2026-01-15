@@ -16,7 +16,7 @@ function Card({
   return (
     <div
       className={cn(
-        "rounded-2xl border border-white/10 bg-white/5 shadow-sm overflow-hidden",
+        "rounded-2xl border border-[var(--border)] bg-[var(--surface-1)] shadow-[var(--shadow-soft)] overflow-hidden",
         className
       )}
     >
@@ -33,11 +33,15 @@ function Badge({
   variant?: "default" | "live" | "soon";
 }) {
   const base =
-    "inline-flex items-center rounded-full border px-3 py-1 text-xs";
+    "inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold";
+
   const variants: Record<string, string> = {
-    default: "border-white/10 bg-white/5 text-white/80",
-    live: "border-emerald-500/30 bg-emerald-500/10 text-emerald-200",
-    soon: "border-white/10 bg-white/5 text-white/70",
+    default:
+      "border-[var(--border)] bg-[rgba(255,255,255,0.04)] text-[color:var(--muted)]",
+    live:
+      "border-[rgba(132,89,43,0.40)] bg-[rgba(132,89,43,0.14)] text-[color:var(--foreground)]",
+    soon:
+      "border-[var(--border)] bg-[rgba(255,255,255,0.03)] text-[color:var(--muted-2)]",
   };
 
   return <span className={cn(base, variants[variant])}>{children}</span>;
@@ -61,10 +65,11 @@ function Button({
   rel?: string;
 }) {
   const base =
-    "inline-flex items-center justify-center rounded-2xl px-4 py-2 text-sm font-medium transition-colors";
-  const solid = "bg-[#C9A24D] text-[#0F1322] hover:bg-[#b8913f]";
+    "inline-flex items-center justify-center rounded-2xl px-4 py-2 text-sm font-semibold transition focus:outline-none focus:ring-2 focus:ring-[var(--focus)]";
+  const solid =
+    "bg-[var(--brand-gold)] text-[#050505] hover:bg-[var(--brand-gold-hover)] active:scale-[0.99]";
   const outline =
-    "border border-[#F5F1E8]/20 bg-transparent text-[#F5F1E8] hover:bg-[#F5F1E8]/10";
+    "border border-[var(--border-strong)] bg-[rgba(255,255,255,0.03)] text-[color:var(--foreground)] hover:bg-[rgba(255,255,255,0.07)]";
   const cls = cn(base, variant === "solid" ? solid : outline, className);
 
   if (href) {
@@ -82,11 +87,9 @@ function Button({
 }
 
 export default function CaseStudiesIndex() {
-  // ✅ Your prefill link
   const PREFILL_FORM_URL =
     "https://docs.google.com/forms/d/e/1FAIpQLSdgXyDCwAl7Hwurtjogt5PouTr1ud809zA9en0dmNSqEGZG0w/viewform?usp=pp_url&entry.1992433045=__EMAIL__";
 
-  // Optional quick links (adjust if you want)
   const linkedIn = "https://www.linkedin.com/in/hsjayathilaka/";
   const calendly =
     "https://calendly.com/hasitha-theroifirm/intro-call-hasitha-jayathilaka";
@@ -96,7 +99,6 @@ export default function CaseStudiesIndex() {
 
   const caseStudies = useMemo(
     () => [
-      // ✅ LIVE
       {
         status: "live",
         slug: "/case-studies/senaka-batagoda",
@@ -114,7 +116,6 @@ export default function CaseStudiesIndex() {
         thumb: "/case-studies/thumbs/aggregator.jpg",
       },
 
-      // ✅ COMING SOON (your 12 in order)
       {
         status: "soon",
         title: "How Games Can Promote Brands",
@@ -226,13 +227,22 @@ export default function CaseStudiesIndex() {
         />
       </Head>
 
-      <div className="min-h-screen bg-[#0F1322] text-[#F5F1E8]">
-        {/* ✅ Sticky top bar (Back + quick actions) */}
-        <header className="sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur">
+      <div className="min-h-screen relative overflow-hidden">
+        {/* ✅ Black Gallery ambient background (matches hero vibe) */}
+        <div className="pointer-events-none absolute inset-0">
+          {/* subtle vignette */}
+          <div className="absolute inset-0 bg-[radial-gradient(1200px_800px_at_50%_0%,rgba(255,255,255,0.04),transparent_60%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(900px_600px_at_20%_20%,rgba(132,89,43,0.12),transparent_55%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(900px_600px_at_80%_30%,rgba(132,89,43,0.08),transparent_60%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.35),transparent_35%,rgba(0,0,0,0.55))]" />
+        </div>
+
+        {/* Sticky top bar */}
+        <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-black/60 backdrop-blur">
           <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
             <a
               href="/"
-              className="inline-flex items-center gap-2 text-sm text-white/80 hover:text-white"
+              className="inline-flex items-center gap-2 text-sm text-[color:var(--muted)] hover:text-[color:var(--foreground)]"
             >
               <ArrowLeft className="h-4 w-4" />
               Back to portfolio
@@ -254,26 +264,30 @@ export default function CaseStudiesIndex() {
           </div>
         </header>
 
-        <main className="mx-auto max-w-6xl px-4 py-12 md:py-16">
+        <main className="relative mx-auto max-w-6xl px-4 py-12 md:py-16">
           {/* Title */}
           <div className="flex flex-col gap-3">
-            <div className="text-xs uppercase tracking-widest text-white/60">
+            <div className="text-xs uppercase tracking-widest text-[color:var(--muted-2)]">
               Portfolio
             </div>
-            <h1 className="text-3xl md:text-4xl font-semibold text-white">
+            <h1 className="text-3xl md:text-4xl font-semibold text-[color:var(--foreground)]">
               Case Studies
             </h1>
-            <p className="text-sm md:text-base text-[#F5F1E8]/75 max-w-3xl">
-              Selected work demonstrating systems thinking, growth strategy, and
-              execution discipline across complex teams and platforms.
+            <p className="text-sm md:text-base text-[color:var(--muted)] max-w-3xl leading-relaxed">
+              Selected work demonstrating systems thinking, growth strategy, and execution
+              discipline across complex teams and platforms.
             </p>
           </div>
 
           {/* Featured */}
           <div className="mt-10">
             <div className="flex items-center justify-between gap-4">
-              <h2 className="text-lg font-semibold text-white">Featured</h2>
-              <div className="text-sm text-white/60">2 Published Case Studies</div>
+              <h2 className="text-lg font-semibold text-[color:var(--foreground)]">
+                Featured
+              </h2>
+              <div className="text-sm text-[color:var(--muted-2)]">
+                2 Published Case Studies
+              </div>
             </div>
 
             <div className="mt-4 space-y-4">
@@ -284,7 +298,7 @@ export default function CaseStudiesIndex() {
                   className="group block"
                   aria-label={`Open case study: ${cs.title}`}
                 >
-                  <Card className="transition-colors duration-200 group-hover:bg-white/10">
+                  <Card className="transition duration-200 group-hover:bg-[rgba(255,255,255,0.07)]">
                     <div className="flex flex-col sm:flex-row gap-0">
                       <div className="sm:w-[180px] md:w-[200px] shrink-0">
                         <img
@@ -299,17 +313,17 @@ export default function CaseStudiesIndex() {
                         <div className="flex items-start justify-between gap-4">
                           <div className="space-y-2">
                             <div className="flex flex-wrap items-center gap-2">
-                              <Badge variant="live">Live</Badge>
-                              <div className="text-lg font-semibold text-white">
+                              <Badge variant="live">Published</Badge>
+                              <div className="text-lg font-semibold text-[color:var(--foreground)]">
                                 {cs.title}
                               </div>
                             </div>
-                            <div className="text-sm text-white/75 max-w-3xl">
+                            <div className="text-sm text-[color:var(--muted)] max-w-3xl leading-relaxed">
                               {cs.desc}
                             </div>
                           </div>
 
-                          <ArrowRight className="mt-1 h-5 w-5 text-white/60 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white" />
+                          <ArrowRight className="mt-1 h-5 w-5 text-[color:var(--muted-2)] transition-transform duration-200 group-hover:translate-x-1 group-hover:text-[color:var(--foreground)]" />
                         </div>
 
                         <div className="mt-4 flex flex-wrap gap-2">
@@ -328,8 +342,10 @@ export default function CaseStudiesIndex() {
           {/* Coming soon */}
           <div className="mt-12">
             <div className="flex items-center justify-between gap-4">
-              <h2 className="text-lg font-semibold text-white">Coming soon</h2>
-              <div className="text-sm text-white/60">
+              <h2 className="text-lg font-semibold text-[color:var(--foreground)]">
+                Coming soon
+              </h2>
+              <div className="text-sm text-[color:var(--muted-2)]">
                 {soon.length} case studies in progress
               </div>
             </div>
@@ -338,14 +354,14 @@ export default function CaseStudiesIndex() {
               {soon.map((cs) => (
                 <Card
                   key={cs.title}
-                  className="group transition-colors duration-200 hover:bg-white/10"
+                  className="group transition duration-200 hover:bg-[rgba(255,255,255,0.07)]"
                 >
                   <div className="flex gap-4 p-5">
                     <div className="w-[92px] shrink-0">
                       <img
                         src={cs.thumb}
                         alt={`${cs.title} thumbnail`}
-                        className="w-full aspect-[4/5] object-cover rounded-xl border border-white/10"
+                        className="w-full aspect-[4/5] object-cover rounded-xl border border-[var(--border)]"
                         loading="lazy"
                       />
                     </div>
@@ -358,12 +374,12 @@ export default function CaseStudiesIndex() {
                             Coming soon
                           </span>
                         </Badge>
-                        <div className="text-base font-semibold text-white">
+                        <div className="text-base font-semibold text-[color:var(--foreground)]">
                           {cs.title}
                         </div>
                       </div>
 
-                      <div className="mt-2 text-sm text-white/75">
+                      <div className="mt-2 text-sm text-[color:var(--muted)] leading-relaxed">
                         {cs.desc}
                       </div>
 
@@ -383,12 +399,11 @@ export default function CaseStudiesIndex() {
           <Card className="mt-12 p-6">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div className="space-y-2">
-                <div className="text-lg font-semibold text-white">
+                <div className="text-lg font-semibold text-[color:var(--foreground)]">
                   Get updates when new case studies go live
                 </div>
-                <p className="text-sm text-white/75 max-w-2xl">
-                  Subscribe to receive a short email whenever a new case study is
-                  published.
+                <p className="text-sm text-[color:var(--muted)] max-w-2xl leading-relaxed">
+                  Subscribe to receive a short email whenever a new case study is published.
                 </p>
               </div>
 
@@ -399,43 +414,42 @@ export default function CaseStudiesIndex() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Your email address"
-                      className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/40 outline-none focus:border-white/20"
+                      className="w-full rounded-2xl border border-[var(--border)] bg-[rgba(255,255,255,0.03)] px-4 py-3 text-sm text-[color:var(--foreground)] placeholder:text-[color:var(--muted-2)] outline-none focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--focus)]"
                     />
                     <button
                       type="button"
                       onClick={openPrefilledForm}
-                      className="inline-flex items-center justify-center rounded-2xl px-4 py-3 text-sm font-medium bg-[#C9A24D] text-[#0F1322] hover:bg-[#b8913f] transition-colors"
+                      className="inline-flex items-center justify-center rounded-2xl px-4 py-3 text-sm font-semibold bg-[var(--brand-gold)] text-[#050505] hover:bg-[var(--brand-gold-hover)] transition focus:outline-none focus:ring-2 focus:ring-[var(--focus)]"
                     >
                       Subscribe
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </button>
                   </div>
                 ) : (
-                  <div className="flex items-start gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-emerald-200">
-                    <CheckCircle2 className="h-5 w-5 mt-0.5" />
-                    <div className="text-sm">
-                      Thank you - you’re subscribed. I’ll email you when new
-                      case studies go live.
+                  <div className="flex items-start gap-3 rounded-2xl border border-[rgba(132,89,43,0.40)] bg-[rgba(132,89,43,0.12)] p-4">
+                    <CheckCircle2 className="h-5 w-5 mt-0.5 text-[color:var(--foreground)]" />
+                    <div className="text-sm text-[color:var(--muted)]">
+                      Thank you — you’re subscribed. I’ll email you when new case studies go live.
                     </div>
                   </div>
                 )}
-
-                <div className="mt-2 text-xs text-white/50">
-                                  </div>
               </div>
             </div>
           </Card>
 
-          {/* ✅ Footer */}
-          <footer className="pt-12 pb-10 text-sm text-white/60">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-white/10 pt-6">
+          {/* Footer */}
+          <footer className="pt-12 pb-10 text-sm text-[color:var(--muted-2)]">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-[var(--border)] pt-6">
               <div>© {new Date().getFullYear()} Hasitha Jayathilaka</div>
               <div className="flex flex-wrap gap-4">
-                <a className="underline underline-offset-4 hover:text-white" href="/">
+                <a
+                  className="underline underline-offset-4 hover:text-[color:var(--foreground)]"
+                  href="/"
+                >
                   Portfolio
                 </a>
                 <a
-                  className="underline underline-offset-4 hover:text-white"
+                  className="underline underline-offset-4 hover:text-[color:var(--foreground)]"
                   href={linkedIn}
                   target="_blank"
                   rel="noreferrer"
@@ -443,7 +457,7 @@ export default function CaseStudiesIndex() {
                   LinkedIn
                 </a>
                 <a
-                  className="underline underline-offset-4 hover:text-white"
+                  className="underline underline-offset-4 hover:text-[color:var(--foreground)]"
                   href={calendly}
                   target="_blank"
                   rel="noreferrer"
