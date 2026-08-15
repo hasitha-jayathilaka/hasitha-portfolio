@@ -9,8 +9,6 @@ import EnquiryModal from "../../components/EnquiryModal";
 const nav = [
   { label: "Work", href: "#work" },
   { label: "Case Studies", href: "/case-studies" },
-  { label: "Services", href: "#services" },
-  { label: "Gallery", href: "#gallery" },
   { label: "Ventures", href: "#ventures" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
@@ -55,6 +53,114 @@ const services = [
   },
 ];
 
+type EducationItem = {
+  title: string;
+  institution: string;
+  status?: string;
+  logos?: string[];
+};
+
+const academicEducation: EducationItem[] = [
+  {
+    title: "BA (Hons) Motion Graphics and Animation",
+    institution:
+      "Academy of Design, Sri Lanka (AOD), affiliated awarding partner Northumbria University",
+    status: "Currently following",
+    logos: ["/logos/aod-logo.png", "/logos/northumbria-logo.png"],
+  },
+  {
+    title: "Diploma in Translation and Interpretation",
+    institution: "University of Kelaniya",
+    logos: ["/logos/kelaniya-logo.png"],
+  },
+];
+
+type WipoItem = {
+  title: string;
+  meta: string;
+  logos?: string[];
+};
+
+const wipoCertifications: WipoItem[] = [
+  {
+    title:
+      "WIPO Mediation and Arbitration Workshop for Intellectual Property and Technology Disputes",
+    meta: "June 2 to 4, 2026, Online",
+    logos: ["/logos/wipo-logo.png", "/logos/wipo-adr-logo.png"],
+  },
+  {
+    title: "Specialized Course on Intellectual Property and Sports Entrepreneurship",
+    meta: "July 2026",
+    logos: ["/logos/wipo-logo.png", "/logos/itc-logo.png"],
+  },
+  {
+    title: "IP Panorama 2.0",
+    meta: "April 2026, with KIPA",
+    logos: ["/logos/wipo-logo.png", "/logos/kipa-logo.png"],
+  },
+  {
+    title: "WIPO Scale Up Your IP Program for Deep-Tech Ventures",
+    meta: "2025, representing Yellow House Productions",
+    logos: ["/logos/wipo-logo.png"],
+  },
+  {
+    title: "WIPO IPMC, Advertising",
+    meta: "2026, representing Yellow House Productions",
+    logos: ["/logos/wipo-logo.png"],
+  },
+  {
+    title: "WIPO x ITU IPMC Workshop: From AI Innovation to Strategic IP Management",
+    meta: "2026, representing Linseed",
+    logos: ["/logos/wipo-logo.png", "/logos/itu-logo.png"],
+  },
+];
+
+type PublicationItem = {
+  title: string;
+  meta: string;
+  href: string;
+  logo: string;
+};
+
+const publications: PublicationItem[] = [
+  {
+    title:
+      "Playing Against Forgetting: Digital Archiving of Sri Lanka's Traditional Games as Living Cultural Heritage",
+    meta: "ITRA Book of Abstracts 2026, page 53",
+    href: "https://static1.squarespace.com/static/67e5af988387dd1d93802b38/t/6a62af5c18b11516d9c17be1/1784852318058/Book_of_Abstracts_ITRA_2026.pdf",
+    logo: "/logos/itra-logo.png",
+  },
+];
+
+type PressItem = {
+  outlet: string;
+  logo: string;
+  href: string;
+};
+
+const pressFeatures: PressItem[] = [
+  {
+    outlet: "Daily News",
+    logo: "/logos/daily-news-logo.png",
+    href: "https://dailynews.lk/2026/07/02/features/1019450/reimagining-heritage-in-the-digital-age/",
+  },
+  {
+    outlet: "Daily Mirror",
+    logo: "/logos/daily-mirror-logo.png",
+    href: "https://www.dailymirror.lk/print/business-news/Yellow-House-Productions-unveils-HELIXRA/273-345956",
+  },
+  {
+    outlet: "Ada Derana",
+    logo: "/logos/ada-derana-logo.png",
+    href: "https://bizenglish.adaderana.lk/yellow-house-partners-with-nanotek-to-advance-sri-lankas-culture-tech-sector/",
+  },
+  {
+    outlet: "Ceylon Today",
+    logo: "/logos/ceylon-today-logo.png",
+    href: "/press/ceylon-today-antarctica-2013.pdf",
+  },
+];
+
 type Venture = {
   title: string;
   role: string;
@@ -68,7 +174,7 @@ const ventures: Venture[] = [
     title: "Yellow House Productions",
     role: "Founder · Studio Lead",
     body: "Culture-tech game and VR studio building The Archivist - immersive reconstructions of real historical environments for entertainment, education, and cultural tourism.",
-    href: "https://thearchivistgame.com/",
+    href: "https://thearchivistgame.art/",
     cta: "Visit project",
   },
   {
@@ -262,7 +368,7 @@ export default function Home() {
   const calendly =
     "https://calendly.com/hasitha-theroifirm/intro-call-hasitha-jayathilaka";
 
-  const onePagerUrl = "/one-pager.pdf";
+  const twoPagerUrl = "/two-pager.pdf";
 
   const [enquiryOpen, setEnquiryOpen] = React.useState(false);
   const [enquiryDefault, setEnquiryDefault] = React.useState<
@@ -280,10 +386,10 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Hasitha Jayathilaka - Fractional CMO / CGO</title>
+        <title>Hasitha Jayathilaka - Culture-Tech Founder / Fractional CMO</title>
         <meta
           name="description"
-          content="Fractional CMO / CGO · Culture-Tech Ambassador · Founder building The Archivist and Linseed."
+          content="Culture-Tech Founder · Fractional CMO/CGO · Founder building The Archivist and Linseed."
         />
       </Head>
 
@@ -303,7 +409,7 @@ export default function Home() {
               <div className="leading-tight">
                 <div className="text-sm font-semibold">Hasitha Jayathilaka</div>
                 <div className="text-xs text-[color:var(--muted-2)]">
-                  Fractional CMO / CGO · Culture-Tech
+                  Culture-Tech Founder · Fractional CMO/CGO
                 </div>
               </div>
             </a>
@@ -321,17 +427,6 @@ export default function Home() {
             </nav>
 
             <div className="flex items-center gap-2">
-              <Button
-                variant="outline"
-                className="hidden sm:inline-flex"
-                onClick={() =>
-                  document
-                    .querySelector("#contact")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-              >
-                Contact
-              </Button>
               <Button onClick={() => openEnquiry("Fractional CMO / Growth Lead")}>
                 Work with me <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -520,7 +615,7 @@ export default function Home() {
                 },
                 {
                   img: "09.jpg",
-                  title: "International Antarctica Expedition (2041)",
+                  title: "International Antarctica Expedition (2013)",
                   caption:
                     "Climate leadership perspective that shapes my work today.",
                 },
@@ -647,6 +742,154 @@ export default function Home() {
             </div>
           </section>
 
+          {/* Education & Credentials */}
+          <section id="education" className="py-14 md:py-20">
+            <SectionTitle
+              eyebrow="Education & Credentials"
+              title="Academic background, training, and published work"
+              desc="Formal education, institutional training, and the frameworks and papers that come out of the work."
+            />
+
+            <div className="mt-8 space-y-10">
+              <div>
+                <div className="text-sm font-semibold text-[color:var(--foreground)] mb-4">
+                  Academic Education
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  {academicEducation.map((item) => (
+                    <Card key={item.title} className="p-6">
+                      {item.status ? (
+                        <div className="text-xs uppercase tracking-widest text-[color:var(--muted-3)] mb-2">
+                          {item.status}
+                        </div>
+                      ) : null}
+                      <div className="text-lg font-semibold">{item.title}</div>
+                      <div className="mt-1 text-sm text-[color:var(--muted-2)]">
+                        {item.institution}
+                      </div>
+                      {item.logos ? (
+                        <div className="mt-4 flex items-center gap-4">
+                          {item.logos.map((logo) => (
+                            <img
+                              key={logo}
+                              src={logo}
+                              alt=""
+                              className="h-10 w-auto object-contain opacity-90"
+                            />
+                          ))}
+                        </div>
+                      ) : null}
+                    </Card>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <div className="text-sm font-semibold text-[color:var(--foreground)] mb-4">
+                  ARRA Framework
+                </div>
+                <Card className="p-6">
+                  <div className="text-lg font-semibold">Founder, ARRA Framework</div>
+                  <p className="mt-2 text-sm text-[color:var(--muted)]">
+                    A personal framework developed from 2012 to 2026, published openly
+                    and used as the ethical foundation across the ventures.
+                  </p>
+                  <a
+                    href="https://arraframework.org/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-4 inline-flex items-center text-sm underline underline-offset-4 hover:text-[color:var(--foreground)]"
+                  >
+                    Visit arraframework.org <ArrowRight className="ml-2 h-4 w-4" />
+                  </a>
+                </Card>
+              </div>
+
+              <div>
+                <div className="text-sm font-semibold text-[color:var(--foreground)] mb-4">
+                  WIPO Training and Certifications
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  {wipoCertifications.map((item) => (
+                    <Card key={item.title} className="p-6">
+                      <div className="text-base font-semibold">{item.title}</div>
+                      <div className="mt-1 text-sm text-[color:var(--muted-2)]">
+                        {item.meta}
+                      </div>
+                      {item.logos ? (
+                        <div className="mt-4 flex items-center gap-4">
+                          {item.logos.map((logo) => (
+                            <img
+                              key={logo}
+                              src={logo}
+                              alt=""
+                              className="h-10 w-auto object-contain opacity-90"
+                            />
+                          ))}
+                        </div>
+                      ) : null}
+                    </Card>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <div className="text-sm font-semibold text-[color:var(--foreground)] mb-4">
+                  Papers Published
+                </div>
+                <div className="grid grid-cols-1 gap-5">
+                  {publications.map((item) => (
+                    <Card key={item.title} className="p-6">
+                      <div className="flex items-start gap-4">
+                        <img
+                          src={item.logo}
+                          alt=""
+                          className="h-10 w-auto object-contain opacity-90 mt-1"
+                        />
+                        <div>
+                          <div className="text-base font-semibold">{item.title}</div>
+                          <div className="mt-1 text-sm text-[color:var(--muted-2)]">
+                            {item.meta}
+                          </div>
+                          <a
+                            href={item.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="mt-3 inline-flex items-center text-sm underline underline-offset-4 hover:text-[color:var(--foreground)]"
+                          >
+                            Read the paper <ArrowRight className="ml-2 h-4 w-4" />
+                          </a>
+                        </div>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <div className="text-sm font-semibold text-[color:var(--foreground)] mb-4">
+                  Press and Media Features
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+                  {pressFeatures.map((item) => (
+                    <a key={item.outlet} href={item.href} target="_blank" rel="noreferrer" className="group">
+                      <Card className="p-5 h-full flex flex-col items-center justify-center text-center transition-colors group-hover:bg-[var(--surface-2)]">
+                        <img
+                          src={item.logo}
+                          alt={item.outlet}
+                          className="h-10 w-auto object-contain opacity-90"
+                        />
+                        <div className="mt-3 text-xs text-[color:var(--muted-2)]">
+                          {item.outlet}
+                        </div>
+                      </Card>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* Contact */}
           <section id="contact" className="py-14 md:py-20">
             <div
@@ -694,8 +937,8 @@ export default function Home() {
                         LinkedIn
                       </Button>
 
-                      <Button variant="outline" href={onePagerUrl} download className="w-full">
-                        Download one-pager (PDF)
+                      <Button variant="outline" href={twoPagerUrl} download className="w-full">
+                        Download Two-Pager (PDF)
                       </Button>
 
                       <Button
