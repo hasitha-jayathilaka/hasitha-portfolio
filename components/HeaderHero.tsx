@@ -51,7 +51,7 @@ export default function HeaderHero() {
                 }}
               >
                 <Sparkles className="h-4 w-4" style={{ color: THEME.gold as any }} />
-                Fractional CMO / CGO • Culture-Tech Ambassador • Story Systems
+                Culture-Tech Founder • Fractional CMO/CGO • IP & Heritage Systems
               </div>
 
               <h1 className="mt-5 text-4xl sm:text-5xl font-semibold tracking-tight">
@@ -75,11 +75,16 @@ export default function HeaderHero() {
                 art, history, and modern distribution.
               </p>
 
+              <p className="mt-3 text-sm max-w-xl" style={{ color: THEME.muted2 }}>
+                Backed by WIPO training in IP strategy and a published research practice in
+                cultural heritage preservation.
+              </p>
+
               <div className="mt-6 flex flex-wrap gap-3">
                 {[
                   "Founder & Venture Builder",
                   "CMO/CGO Growth Leadership",
-                  "Research-driven Cultural Storytelling",
+                  "Founder, ARRA Framework",
                 ].map((t) => (
                   <span
                     key={t}
@@ -105,6 +110,7 @@ export default function HeaderHero() {
                     "Investor / sponsor demos (XR/VR)",
                     "Speaking: innovation • storytelling • gamification",
                     "Fractional CMO/CGO leadership for growth",
+                    "Academic and institutional collaboration (WIPO-trained, AOD)",
                   ].map((t) => (
                     <span
                       key={t}
@@ -243,7 +249,7 @@ export default function HeaderHero() {
                     }}
                   >
                     <div className="text-sm font-semibold">
-                      Fractional CMO / CGO • Culture-Tech
+                      Culture-Tech Founder • Fractional CMO/CGO
                     </div>
                     <div className="text-xs" style={{ color: THEME.muted2 }}>
                       Narrative architecture • Distribution systems • Partnerships
